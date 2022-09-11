@@ -1,0 +1,18 @@
+version: '3.3'
+
+services:
+  neo4j:
+    image: 'neo4j:latest'
+    volumes:
+      - ./neo4j-data:/data
+      - ./neo4jplugins:/var/lib/neo4j/plugins
+      - ./csv-data:/var/lib/neo4j/import
+    ports:
+      - '7474:7474'
+      - '7473:7473'
+      - '7687:7687'
+    environment:
+      NEO4J_AUTH: neo4j/password
+      NEO4J_dbms_default__database: neo4jspark
+      NEO4J_dbms_security_procedures_unrestricted: 'gds.*,apoc.*'
+#      NEO4JLABS_PLUGINS: '["apoc","graph-data-science"]'
